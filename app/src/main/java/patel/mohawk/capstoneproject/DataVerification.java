@@ -26,7 +26,7 @@ import java.util.concurrent.Executor;
 
 class DataVerification {
 
-    private FirebaseAuth mAuth= FirebaseAuth.getInstance();
+    public FirebaseAuth mAuth;
 
     private ArrayList<EditText> userData = new ArrayList<>();
 
@@ -34,7 +34,7 @@ class DataVerification {
         userData = temp;
     }
     void firstMethod(final ArrayList<EditText> temp){
-        mAuth = FirebaseAuth.getInstance();
+
         for(int i=0;i<temp.size();i++){
 
             final int finalI = i;
@@ -131,11 +131,12 @@ class DataVerification {
      * Send Data to database for storing after validating
      *
      */
-    void createAccount() {
+    void createAccount(View view) {
+        mAuth=FirebaseAuth.getInstance();
         try {
             Log.d("Flag","in create account try");
-            mAuth.createUserWithEmailAndPassword(userData.get(0).getText().toString(), userData.get(2).getText().toString())
-                    .addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+            mAuth.createUserWithEmailAndPassword(userData.get(1).getText().toString(), userData.get(2).getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             Log.d("Flag","in on complete");
@@ -201,7 +202,7 @@ class DataVerification {
         final FirebaseUser user=mAuth.getCurrentUser();
         assert user != null;
         user.sendEmailVerification()
-                .addOnCompleteListener((Executor) this, new OnCompleteListener() {
+                .addOnCompleteListener(new OnCompleteListener() {
                     @Override
                     public void onComplete(@NonNull Task task) {
                         // Re-enable button
@@ -219,8 +220,7 @@ class DataVerification {
     }
 
     private void changeActivity() {
-        SignUp signUp=new SignUp();
-        signUp.changeActivity();
+
 
     }
 

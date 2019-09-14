@@ -1,15 +1,25 @@
 package patel.mohawk.capstoneproject;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executor;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -41,7 +51,7 @@ public class SignUp extends AppCompatActivity {
         ButterKnife.bind(this);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        temp= new ArrayList<>();
+        temp = new ArrayList<>();
         temp.add(userFullName);
         temp.add(userEmail);
         temp.add(userPassword);
@@ -49,7 +59,7 @@ public class SignUp extends AppCompatActivity {
         temp.add(userSecurityQuestionAnswer);
         temp.add(phoneNumber);
         signUp.setEnabled(true);
-       dataVerification=new DataVerification(temp);
+        dataVerification = new DataVerification(temp);
         abc();
 
     }
@@ -59,17 +69,16 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-
     public void switchToLoginPage(View view) {
 
     }
 
     public void changeActivity() {
-    Intent intent=new Intent(this,MainActivity.class);
-    startActivity(intent);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void createAccount(View view) {
-        dataVerification.createAccount();
+    dataVerification.createAccount(view);
     }
 }
