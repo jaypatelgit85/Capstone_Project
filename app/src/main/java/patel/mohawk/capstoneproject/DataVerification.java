@@ -22,11 +22,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Executor;
+
 
 class DataVerification {
-
-    public FirebaseAuth mAuth;
+    SignUp signUp=new SignUp();
+    private FirebaseAuth mAuth;
 
     private ArrayList<EditText> userData = new ArrayList<>();
 
@@ -81,7 +81,7 @@ class DataVerification {
      *
      * @param editText
      */
-    private void emailValidation(EditText editText) {
+    void emailValidation(EditText editText) {
         if(!Patterns.EMAIL_ADDRESS.matcher(editText.getText().toString()).matches()){
             editText.setError("Invalid Email Address");
         }
@@ -92,7 +92,7 @@ class DataVerification {
      *
      * @param editText
      */
-    private void textInputValidation(EditText editText){
+    void textInputValidation(EditText editText){
         if(editText.getText().toString().matches("")){
             editText.setError("Required");
         }
@@ -145,15 +145,7 @@ class DataVerification {
                                 Log.d("Create User", "createUserWithEmail:success");
                                 addUserData();
                                 verifyUseEmail();
-                                new Timer().schedule(new TimerTask() {
-                                    @Override
-                                    public void run() {
-                                        // run AsyncTask here.
-                                        changeActivity();
 
-                                    }
-                                }, 1000);
-                            } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("Create User", "createUserWithEmail:failure", task.getException());
 
@@ -198,7 +190,7 @@ class DataVerification {
 
     }
 
-    private void verifyUseEmail(){
+    void verifyUseEmail(){
         final FirebaseUser user=mAuth.getCurrentUser();
         assert user != null;
         user.sendEmailVerification()
@@ -219,9 +211,5 @@ class DataVerification {
 
     }
 
-    private void changeActivity() {
-
-
-    }
 
 }
