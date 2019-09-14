@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "955188793787",
+    "firebase_url": "https://gold-rock-249809.firebaseio.com",
+    "project_id": "gold-rock-249809",
+    "storage_bucket": "gold-rock-249809.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955188793787:android:db1918b32955e83640f49e",
+        "android_client_info": {
+          "package_name": "patel.mohawk.capstoneproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955188793787-p5o20v1g4jdm0cm5ucs9aeltdcr4b152.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "patel.mohawk.capstoneproject",
+            "certificate_hash": "886c288650cf32661ac5f8d272453791b5c9adf6"
+          }
+        },
+        {
+          "client_id": "955188793787-bb9aihruhtisomjm5q7htm6qnt1bpn51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf5eTIIZTeRA9kyDzwjw5wyZj9PajXjaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955188793787-bb9aihruhtisomjm5q7htm6qnt1bpn51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
