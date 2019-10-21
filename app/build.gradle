@@ -5,6 +5,10 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "patel.mohawk.capstoneproject"
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -32,7 +36,7 @@ dependencies {
     implementation "com.google.android.material:material:1.1.0-alpha10"
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.firebase:firebase-auth:19.0.0'
-    implementation 'com.google.firebase:firebase-firestore:21.0.0'
+    implementation 'com.google.firebase:firebase-firestore:21.1.1'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }

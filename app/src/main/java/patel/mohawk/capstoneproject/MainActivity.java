@@ -11,7 +11,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;;
@@ -84,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view) {
         auth=FirebaseAuth.getInstance();
-        ;
-
         auth.signInWithEmailAndPassword(userEmail.getText().toString(),userPassword.getText().toString())
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -96,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                             user = auth.getCurrentUser();
                             if(user.isEmailVerified()){
                                 Toast.makeText(MainActivity.this, "Sign In Succesful", Toast.LENGTH_SHORT).show();
-                               // goToHomePage();
+                                goToHomePage();
                             }
                             else {
                                 Toast.makeText(MainActivity.this, "Email Not Verified Yet", Toast.LENGTH_SHORT).show();
@@ -116,17 +113,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-public void homepage(View view) {
 
-//      DataVerification dataVerification=new DataVerification(abc);
-//      dataVerification.first(abc);
+    public void goToHomePage(){
+
+        Intent intent = new Intent(this,HomePage.class);
+        startActivity(intent);
+
     }
 
-//    public void goToHomePage(){
-//            Intent intent=new Intent(this,UserHomePage.class);
-//            startActivity(intent);
 
-   // }
+public void homepage(View view) {
+        Intent intent=new Intent(this,AdminEmployeeCreate.class);
+        startActivity(intent);
+    }
 
 }
 

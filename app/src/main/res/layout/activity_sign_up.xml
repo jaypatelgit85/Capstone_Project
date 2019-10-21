@@ -78,30 +78,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-
-            <EditText
-                android:id="@+id/inputSecurityQuestion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/enter_security_question"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginBottom="8dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-           >
-
-            <EditText
-                android:id="@+id/inputSecurityQuestionAnswer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/security_question_answer"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+           />
 
 
         <!-- Signup Button -->

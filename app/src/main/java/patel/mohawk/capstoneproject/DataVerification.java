@@ -7,7 +7,6 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,22 +15,21 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
-class DataVerification {
-    SignUp signUp=new SignUp();
+class DataVerification{
+
     private FirebaseAuth mAuth;
+    SignUp signUp=new SignUp();
+    private ArrayList<EditText> userData;
+    private boolean isEmployee;
 
-    private ArrayList<EditText> userData = new ArrayList<>();
-
-    DataVerification(ArrayList<EditText> temp) {
+    DataVerification(ArrayList<EditText> temp,boolean isEmployee) {
         userData = temp;
+        this.isEmployee = isEmployee;
     }
     void firstMethod(final ArrayList<EditText> temp){
 
@@ -63,12 +61,12 @@ class DataVerification {
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+                    //signUp.setSignUpButtonEnabler(finalValidation(userData));
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
-
+                  finalValidation(userData);
                 }
             });
 
@@ -105,7 +103,7 @@ class DataVerification {
      * @param
      * @return
      */
-    /*private Boolean finalValidation(ArrayList<EditText> editTexts) {
+    private void finalValidation(ArrayList<EditText> editTexts) {
         boolean temp=false;
         for(int i=0;i<editTexts.size();i++){
             if(!editTexts.get(i).getText().toString().matches("")){
@@ -122,16 +120,16 @@ class DataVerification {
                 break;
             }
         }
-
-        return temp;
-    }*/
+        signUp.abb(temp);
+    }
 
 
     /**
      * Send Data to database for storing after validating
      *
+     * @return
      */
-    void createAccount(View view) {
+    boolean createAccount() {
         mAuth=FirebaseAuth.getInstance();
         try {
             Log.d("Flag","in create account try");
@@ -145,10 +143,8 @@ class DataVerification {
                                 Log.d("Create User", "createUserWithEmail:success");
                                 addUserData();
                                 verifyUseEmail();
-
                                 // If sign in fails, display a message to the user.
                                 Log.w("Create User", "createUserWithEmail:failure", task.getException());
-
                             }
 
                             // ...
@@ -156,35 +152,55 @@ class DataVerification {
 
 
                     });
-
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
+
     }
     private void addUserData() {
         FirebaseUser user=mAuth.getCurrentUser();
         Map<String, Object> users = new HashMap<>();
         users.put("fullName",userData.get(0).getText().toString());
-        users.put("phoneNumber",userData.get(5).getText().toString());
+        users.put("phoneNumber",userData.get(3).getText().toString());
         users.put("email",userData.get(1).getText().toString());
         users.put("admin",false);
-        users.put("employee",false);
+        users.put("employee",isEmployee);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        assert user != null;
-        db.collection(user.getUid()).document("userLogin")
-                .set(users)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("", "DocumentSnapshot successfully written!");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("", "Error writing document", e);
-                    }
-                });
+        if(isEmployee){
+            assert user != null;
+            db.collection("Employees").document(userData.get(1).getText().toString())
+                    .set(users)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("", "Error writing document", e);
+                        }
+                    });
+        }else{
+            assert user != null;
+            db.collection(user.getUid()).document("userLogin")
+                    .set(users)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("", "Error writing document", e);
+                        }
+                    });
+        }
 
 
 
@@ -193,23 +209,28 @@ class DataVerification {
     void verifyUseEmail(){
         final FirebaseUser user=mAuth.getCurrentUser();
         assert user != null;
-        user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) {
-                        // Re-enable button
+        if(!isEmployee )
+        {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener() {
+                        @Override
+                        public void onComplete(@NonNull Task task) {
+                            // Re-enable button
 
-                        if (task.isSuccessful()) {
-                            Log.d("Flag","Emial Sent");
-                        } else {
+                            if (task.isSuccessful()) {
+                                Log.d("Flag","Email Sent");
+                            } else {
 
-                            Log.e("", "sendEmailVerification", task.getException());
-                            Log.d("Flag","Email Sent");
+                                Log.e("", "sendEmailVerification", task.getException());
+                                Log.d("Flag","Email Sent");
+                            }
                         }
-                    }
-                });
+                    });
+        }
+
 
     }
+
 
 
 }
