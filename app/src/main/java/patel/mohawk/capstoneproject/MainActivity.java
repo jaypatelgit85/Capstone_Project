@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -127,5 +127,10 @@ public void homepage(View view) {
         startActivity(intent);
     }
 
+    public void abc(View view) {
+        Intent intent = new Intent(this,HomePage.class);
+        startActivity(intent);
+
+    }
 }
 

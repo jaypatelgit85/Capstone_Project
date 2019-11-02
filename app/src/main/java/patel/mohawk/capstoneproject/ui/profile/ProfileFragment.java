@@ -1,4 +1,4 @@
-package patel.mohawk.capstoneproject.ui.home;
+package patel.mohawk.capstoneproject.ui.profile;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,22 +13,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import patel.mohawk.capstoneproject.HomePage;
 import patel.mohawk.capstoneproject.R;
 
-public class HomeFragment extends Fragment {
+public class ProfileFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private ProfileViewModel profileViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        profileViewModel =
+                ViewModelProviders.of(this).get(ProfileViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-
+        ImageView img = root.findViewById(R.id.imageView2);
+        img.setImageResource(R.drawable.ic_launcher_foreground);
         return root;
     }
-
-
 }
