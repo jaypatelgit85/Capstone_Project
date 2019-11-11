@@ -2,7 +2,10 @@ package patel.mohawk.capstoneproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -40,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         signIn.setEnabled(false);
         listenerAdditions();
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }else{
+            // Write you code here if permission already given.
+        }
     }
 
     private void listenerAdditions() {
@@ -123,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 public void homepage(View view) {
-        Intent intent=new Intent(this,AdminEmployeeCreate.class);
-        startActivity(intent);
     }
 
     public void abc(View view) {
