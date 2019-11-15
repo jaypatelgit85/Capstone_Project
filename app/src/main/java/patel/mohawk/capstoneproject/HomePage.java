@@ -21,24 +21,29 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.material.navigation.NavigationView;
-import com.google.gson.JsonArray;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 
-public class HomePage extends AppCompatActivity {
+public class HomePage extends AppCompatActivity{
+    private static final String TAG = "MainActivity";
+    private String[] mDataset;
+    private ArrayAdapter<String> myAdapter;
     private static int RESULT_LOAD_IMAGE = 1;
     private AppBarConfiguration mAppBarConfiguration;
     private RequestQueue requestQueue;
@@ -59,10 +64,15 @@ public class HomePage extends AppCompatActivity {
                 R.id.nav_tools, R.id.nav_map)
                 .setDrawerLayout(drawer)
                 .build();
+        mDataset = new String[]{"Cheese", "Pepperoni", "Black Olives"};
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+//        initBitmapImages();
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,32 +119,42 @@ public class HomePage extends AppCompatActivity {
 
     }
 
-    public void searchMovie(View view){
-        // add code for getting movies from omdb website
-        EditText userQuery = findViewById(R.id.searchField);
-        String userQueryString = userQuery.getText().toString();
-        String url = "http://www.omdbapi.com/?s="+userQueryString+"&apikey=28f258f4";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("inget","in get");
-                try {
-                    JSONArray jsonArray = response.getJSONArray("Search");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-        });
 
+//    public void searchMovie(View view){
+//        // add code for getting movies from omdb website
+//        EditText userQuery = findViewById(R.id.searchField);
+//        String userQueryString = userQuery.getText().toString();
+//        String url = "http://www.omdbapi.com/?s="+userQueryString+"&apikey=28f258f4";
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//
+//                try {
+//                    JSONArray jsonArray = response.getJSONArray("Search");
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                error.printStackTrace();
+//            }
+//        });
+//
+//
+//        requestQueue.add(jsonObjectRequest);
+//
+//        RecyclerView recyclerView = findViewById(R.id.moviesListRecyclerView);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        myAdapter=new ArrayAdapter< >(this,android.R.layout.simple_list_item_1,
+//                mDataset);
+//
+//
+//
+//    }
 
-        requestQueue.add(jsonObjectRequest);
-
-    }
 
 
 }
