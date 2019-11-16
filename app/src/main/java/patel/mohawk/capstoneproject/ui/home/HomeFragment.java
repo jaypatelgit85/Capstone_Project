@@ -33,9 +33,9 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Bitmap> mImages = new ArrayList<>();
+
     View intialRoot;
-    boolean abc = false;
-    int count =0;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,8 +57,10 @@ public class HomeFragment extends Fragment {
 
 
 
-        new DownloadImageTask().execute("https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg");
-        new DownloadImageTask().execute("https://m.media-amazon.com/images/M/MV5BNTg2OTY2ODg5OF5BMl5BanBnXkFtZTcwODM5MTYxOA@@._V1_SX300.jpg");
+
+
+        new DownloadImageTask().execute("https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg","https://m.media-amazon.com/images/M/MV5BNTg2OTY2ODg5OF5BMl5BanBnXkFtZTcwODM5MTYxOA@@._V1_SX300.jpg");
+
 //            initRecyleerView();
 
 
@@ -84,11 +86,15 @@ public class HomeFragment extends Fragment {
 
             try {
                 URL url = null;
-                url = new URL(strings[0]);
+                for(int i =0; i<strings.length;i++){
+                    url = new URL(strings[i]);
 
-                bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 
-                mImages.add(bmp);
+                    mImages.add(bmp);
+
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,10 +105,9 @@ public class HomeFragment extends Fragment {
             if (result != null) {
                 // Find the ImageView object to use
 
-                count++;
-                if(count==2){
+
                     initRecyleerView();
-                }
+
 
             }
         }
