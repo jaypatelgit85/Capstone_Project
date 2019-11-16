@@ -28,6 +28,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mMovieNames = mMovieNames;
         this.mMoviePosters = mMoviePosters;
         this.mcontext = mcontext;
+        Log.d("size",this.mMovieNames.size()+"");
     }
 
     @NonNull
@@ -43,7 +44,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Log.d("newItem",mMoviePosters.size()+"");
 
-        holder.moviePoster.setImageBitmap(mMoviePosters.get(position));
+      holder.moviePoster.setImageBitmap(mMoviePosters.get(position));
         holder.movieName.setText(mMovieNames.get(position));
 
 
@@ -59,7 +60,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
+        Log.d("size",this.mMovieNames.size()+"");
         return mMovieNames.size();
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

@@ -34,6 +34,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Bitmap> mImages = new ArrayList<>();
     View intialRoot;
+    boolean abc = false;
+    int count =0;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,9 +53,13 @@ public class HomeFragment extends Fragment {
     private void initBitmapImages(){
 
         mNames.add("The Avengers: End Game");
-        Log.d("Tag",mNames.get(0));
-        new DownloadImageTask().execute("https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg");
+        mNames.add("Life Of Pi");
 
+
+
+        new DownloadImageTask().execute("https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg");
+        new DownloadImageTask().execute("https://m.media-amazon.com/images/M/MV5BNTg2OTY2ODg5OF5BMl5BanBnXkFtZTcwODM5MTYxOA@@._V1_SX300.jpg");
+//            initRecyleerView();
 
 
     }
@@ -83,8 +89,6 @@ public class HomeFragment extends Fragment {
                 bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 
                 mImages.add(bmp);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -94,7 +98,11 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Bitmap result) {
             if (result != null) {
                 // Find the ImageView object to use
-                initRecyleerView();
+
+                count++;
+                if(count==2){
+                    initRecyleerView();
+                }
 
             }
         }
