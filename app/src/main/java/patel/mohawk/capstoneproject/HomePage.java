@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -39,6 +41,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import patel.mohawk.capstoneproject.ui.home.HomeFragment;
+
 
 public class HomePage extends AppCompatActivity{
     private static final String TAG = "MainActivity";
@@ -46,12 +50,12 @@ public class HomePage extends AppCompatActivity{
     private ArrayAdapter<String> myAdapter;
     private static int RESULT_LOAD_IMAGE = 1;
     private AppBarConfiguration mAppBarConfiguration;
-    private RequestQueue requestQueue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestQueue = Volley.newRequestQueue(this);
+
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -120,40 +124,7 @@ public class HomePage extends AppCompatActivity{
     }
 
 
-//    public void searchMovie(View view){
-//        // add code for getting movies from omdb website
-//        EditText userQuery = findViewById(R.id.searchField);
-//        String userQueryString = userQuery.getText().toString();
-//        String url = "http://www.omdbapi.com/?s="+userQueryString+"&apikey=28f258f4";
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//
-//                try {
-//                    JSONArray jsonArray = response.getJSONArray("Search");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//            }
-//        });
-//
-//
-//        requestQueue.add(jsonObjectRequest);
-//
-//        RecyclerView recyclerView = findViewById(R.id.moviesListRecyclerView);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        myAdapter=new ArrayAdapter< >(this,android.R.layout.simple_list_item_1,
-//                mDataset);
-//
-//
-//
-//    }
+
 
 
 

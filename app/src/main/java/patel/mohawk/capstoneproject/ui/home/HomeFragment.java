@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +20,19 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.JsonArray;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -33,8 +48,10 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<Bitmap> mImages = new ArrayList<>();
-
+    private RequestQueue requestQueue;
+    Button searchButton;
     View intialRoot;
+    String[] identifiers;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -43,24 +60,64 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         intialRoot = root;
-        initBitmapImages();
+//        initBitmapImages();
+        requestQueue = Volley.newRequestQueue(root.getContext());
+
+
+        searchButton = root.findViewById(R.id.serachForMovie);
+// Register the onClick listener with the implementation above
+
+        searchButton.setOnClickListener(view -> {
+            mainFunction();
+        });
+
         return root;
     }
 
 
 
+    private void mainFunction(){
 
-    private void initBitmapImages(){
+            EditText userQuery = intialRoot.findViewById(R.id.userSearch);
+            String userQueryString = userQuery.getText().toString();
+            String url = "http://www.omdbapi.com/?s="+userQueryString+"&apikey=28f258f4";
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
 
-        mNames.add("The Avengers: End Game");
-        mNames.add("Life Of Pi");
+                    try {
+                        JSONArray jsonArray = response.getJSONArray("Search");
+                        initBitmapImagesAndNames(jsonArray);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    error.printStackTrace();
+                }
+            });
 
 
+            requestQueue.add(jsonObjectRequest);
+
+    }
+
+    private void initBitmapImagesAndNames(JSONArray jsonArray) throws JSONException {
+        identifiers = new String[jsonArray.length()];
+        mNames.clear();
+        mImages.clear();
+        String[] movies = new String[jsonArray.length()];
+        for (int i = 0; i < jsonArray.length(); i++ ){
+            mNames.add(jsonArray.getJSONObject(i).getString("Title"));
+            identifiers[i] = jsonArray.getJSONObject(i).getString("imdbID");
+            movies[i] = jsonArray.getJSONObject(i).getString("Poster");
+
+        }
 
 
-
-        new DownloadImageTask().execute("https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SX300.jpg","https://m.media-amazon.com/images/M/MV5BNTg2OTY2ODg5OF5BMl5BanBnXkFtZTcwODM5MTYxOA@@._V1_SX300.jpg");
-
+        new DownloadImageTask().execute(movies);
 //            initRecyleerView();
 
 
