@@ -1,6 +1,7 @@
 package patel.mohawk.capstoneproject;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
@@ -46,19 +47,24 @@ import patel.mohawk.capstoneproject.ui.home.HomeFragment;
 
 public class HomePage extends AppCompatActivity{
     private static final String TAG = "MainActivity";
-    private String[] mDataset;
     private ArrayAdapter<String> myAdapter;
     private static int RESULT_LOAD_IMAGE = 1;
     private AppBarConfiguration mAppBarConfiguration;
-
+    Context context;
+    Context homePage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_home_page);
+        context = getBaseContext();
+        homePage = getApplicationContext();
+        Log.d("activity2",context+"");
+        Log.d("activity",homePage+"");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        context =  getBaseContext();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -68,7 +74,7 @@ public class HomePage extends AppCompatActivity{
                 R.id.nav_tools, R.id.nav_map)
                 .setDrawerLayout(drawer)
                 .build();
-        mDataset = new String[]{"Cheese", "Pepperoni", "Black Olives"};
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -76,6 +82,7 @@ public class HomePage extends AppCompatActivity{
 //        initBitmapImages();
 
     }
+
 
 
     @Override
@@ -115,8 +122,8 @@ public class HomePage extends AppCompatActivity{
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
 
-            ImageView imageView = (ImageView) findViewById(R.id.imageView2);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+//            ImageView imageView = (ImageView) findViewById(R.id.imageView2);
+//            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
 
         }
 

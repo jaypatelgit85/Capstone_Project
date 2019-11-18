@@ -1,5 +1,7 @@
 package patel.mohawk.capstoneproject.ui.home;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -35,6 +37,7 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -52,6 +55,8 @@ public class HomeFragment extends Fragment {
     Button searchButton;
     View intialRoot;
     String[] identifiers;
+    Activity activity;
+    Context context;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -60,10 +65,11 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         intialRoot = root;
+        activity = getActivity();
+        context = activity.getBaseContext();
+        Log.d("activity",context+"");
 //        initBitmapImages();
         requestQueue = Volley.newRequestQueue(root.getContext());
-
-
         searchButton = root.findViewById(R.id.serachForMovie);
 // Register the onClick listener with the implementation above
 
@@ -126,8 +132,7 @@ public class HomeFragment extends Fragment {
     private void initRecyleerView(){
 
         RecyclerView recyclerView = intialRoot.findViewById(R.id.moviesListRecyclerView);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(mNames,mImages,intialRoot.getContext());
-
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(mNames,mImages,intialRoot.getContext(),context);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(intialRoot.getContext()));
 
@@ -170,6 +175,7 @@ public class HomeFragment extends Fragment {
         }
 
     }
+
 
 
 }

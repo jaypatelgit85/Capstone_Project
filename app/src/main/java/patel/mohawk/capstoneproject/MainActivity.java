@@ -125,14 +125,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToHomePage(){
 
-        Intent intent = new Intent(this,HomePage.class);
+        Intent intent = new Intent(this,ShowMovie.class);
         startActivity(intent);
 
     }
 
 
-public void homepage(View view) {
-    }
 
     public void abc(View view) {
         Intent intent = new Intent(this,HomePage.class);

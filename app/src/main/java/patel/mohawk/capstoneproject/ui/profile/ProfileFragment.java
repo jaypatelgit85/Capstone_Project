@@ -25,8 +25,8 @@ public class ProfileFragment extends Fragment {
                 ViewModelProviders.of(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        ImageView img = root.findViewById(R.id.imageView2);
-        img.setImageResource(R.drawable.ic_launcher_foreground);
+//        ImageView img = root.findViewById(R.id.imageView2);
+//        img.setImageResource(R.drawable.ic_launcher_foreground);
         return root;
     }
 }
