@@ -21,6 +21,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONArray;
+
 import java.util.ArrayList;
 
 import patel.mohawk.capstoneproject.ui.home.HomeFragment;
@@ -31,16 +33,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mMovieNames;
     private ArrayList<Bitmap> mMoviePosters;
     private Context mcontext;
-    private Context context;
-
-    HomePage homePage;
+    private JSONArray searchResults;
 
 
-    public RecyclerViewAdapter(ArrayList<String> mMovieNames, ArrayList<Bitmap> mMoviePosters, Context mcontext,Context context) {
+    public RecyclerViewAdapter(ArrayList<String> mMovieNames, ArrayList<Bitmap> mMoviePosters, Context mcontext,JSONArray searchResults) {
         this.mMovieNames = mMovieNames;
         this.mMoviePosters = mMoviePosters;
         this.mcontext = mcontext;
-        this.context = context;
+        this.searchResults = searchResults;
 
 
         Log.d("size",this.mMovieNames.size()+"");
@@ -65,15 +65,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProfileFragment profileFragment = new ProfileFragment();
-                Bundle args = new Bundle();
-                profileFragment.setArguments(args);
-
-                Log.d("activity",context+"");
-
-
-
                 Intent intent = new Intent(mcontext,ShowMovie.class);
+                intent.putExtra("jsonArray",searchResults.toString());
+                intent.putExtra("position",position);
                 mcontext.startActivity(intent);
             }
         });

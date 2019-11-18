@@ -206,24 +206,21 @@ class DataVerification{
 
     }
 
-    void verifyUseEmail(){
+    private void verifyUseEmail(){
         final FirebaseUser user=mAuth.getCurrentUser();
         assert user != null;
         if(!isEmployee )
         {
             user.sendEmailVerification()
-                    .addOnCompleteListener(new OnCompleteListener() {
-                        @Override
-                        public void onComplete(@NonNull Task task) {
-                            // Re-enable button
+                    .addOnCompleteListener((OnCompleteListener) task -> {
+                        // Re-enable button
 
-                            if (task.isSuccessful()) {
-                                Log.d("Flag","Email Sent");
-                            } else {
+                        if (task.isSuccessful()) {
+                            Log.d("Flag","Email Sent");
+                        } else {
 
-                                Log.e("", "sendEmailVerification", task.getException());
-                                Log.d("Flag","Email Sent");
-                            }
+                            Log.e("", "sendEmailVerification", task.getException());
+                            Log.d("Flag","Email Sent");
                         }
                     });
         }

@@ -13,12 +13,39 @@
         android:layout_marginEnd="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
-
-        <ImageView
-            android:id="@+id/imageView4"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:srcCompat="@tools:sample/avatars[0]" />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/movieShowPoster"
+                android:layout_width="185dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardView5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars[0]" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView5"
+                android:layout_width="209dp"
+                android:layout_height="277dp"
+                app:cardBackgroundColor="#d3d3d3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" >
+
+                <TextView
+                    android:id="@+id/movieRatings"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+
+                    android:textSize="19sp" />
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -35,16 +62,17 @@
             android:layout_height="79dp">
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/movieShowName"
                 android:layout_width="377dp"
                 android:layout_height="53dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="17dp"
                 android:gravity="center"
-                android:text="Movie Name And Rating Goes Here"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -62,12 +90,11 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/movieShowDetails"
                 android:layout_width="399dp"
                 android:layout_height="236dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:text="Plot And Other Details"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -79,8 +106,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="173dp"
                 android:text="Rent"
+                android:onClick="rentMovie"
                 app:layout_constraintEnd_toStartOf="@+id/button4"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/movieShowDetails" />
 
             <Button
                 android:id="@+id/button4"
@@ -89,8 +117,9 @@
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="21dp"
                 android:text="Add To Fav"
+                android:onClick="addToFav"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+                app:layout_constraintTop_toBottomOf="@+id/movieShowDetails" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

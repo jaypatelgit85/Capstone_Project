@@ -55,8 +55,7 @@ public class HomeFragment extends Fragment {
     Button searchButton;
     View intialRoot;
     String[] identifiers;
-    Activity activity;
-    Context context;
+    JSONArray results;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,9 +64,6 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         intialRoot = root;
-        activity = getActivity();
-        context = activity.getBaseContext();
-        Log.d("activity",context+"");
 //        initBitmapImages();
         requestQueue = Volley.newRequestQueue(root.getContext());
         searchButton = root.findViewById(R.id.serachForMovie);
@@ -93,6 +89,8 @@ public class HomeFragment extends Fragment {
 
                     try {
                         JSONArray jsonArray = response.getJSONArray("Search");
+                        results = jsonArray;
+                        Log.d("log1",jsonArray+"");
                         initBitmapImagesAndNames(jsonArray);
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -132,7 +130,7 @@ public class HomeFragment extends Fragment {
     private void initRecyleerView(){
 
         RecyclerView recyclerView = intialRoot.findViewById(R.id.moviesListRecyclerView);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(mNames,mImages,intialRoot.getContext(),context);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(mNames,mImages,intialRoot.getContext(),results);
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(intialRoot.getContext()));
 

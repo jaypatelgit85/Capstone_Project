@@ -41,7 +41,7 @@ public class SignUp extends AppCompatActivity {
         temp.add(userEmail);
         temp.add(userPassword);
         temp.add(phoneNumber);
-        signUp.setEnabled(false);
+
         dataVerification = new DataVerification(temp,false);
         abc();
 
