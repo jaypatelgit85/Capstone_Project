@@ -1,5 +1,6 @@
 package patel.mohawk.capstoneproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,17 +20,24 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ShowMovie extends AppCompatActivity {
     JSONArray results;
@@ -77,13 +85,17 @@ public class ShowMovie extends AppCompatActivity {
                     new DownloadImageTask().execute(response.getString("Poster"));
                     TextView movieName = findViewById(R.id.movieShowName);
                     movieName.setText(response.get("Title")+"");
+
                     JSONArray jsonArrayRatings = response.getJSONArray("Ratings");
                     String ratings="";
                     for(int i =0;i<jsonArrayRatings.length();i++){
                         ratings += jsonArrayRatings.getJSONObject(i).getString("Source")+" : - "+jsonArrayRatings.getJSONObject(i).getString("Value")+"\n";
                     }
+                    ratings +="Meta Score: "+response.getString("Metascore")+"\nIMDB Rating :"+response.getString("imdbRating");
                     TextView movieRatings = findViewById(R.id.movieRatings);
                     movieRatings.setText(ratings);
+                    TextView movieDetails = findViewById(R.id.movieShowDetails);
+                    movieDetails.setText("Plot : "+response.get("Plot")+"\n \n Awards : "+response.getString("Awards"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -102,17 +114,49 @@ public class ShowMovie extends AppCompatActivity {
 
     }
 
-    public void rentMovie(View view) {
-
+    public void rentMovie(View view) throws JSONException {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.d(TAG,user.getUid()+"");
-
+        Map<String,String> data = new HashMap<>();
+        data.put(results.getJSONObject(position).getString("imdbID"),results.getJSONObject(position).getString("Title"));
+        db.collection(user.getUid()).document("Rent")
+                .set(data, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
 
 
 
     }
 
-    public void addToFav(View view) {
-
+    public void addToFav(View view) throws JSONException {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Log.d(TAG,user.getUid()+"");
+        Map<String,String> data = new HashMap<>();
+        data.put(results.getJSONObject(position).getString("imdbID"),results.getJSONObject(position).getString("Title"));
+        db.collection(user.getUid()).document("Fav")
+                .set(data, SetOptions.merge())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });
     }
 
     private class DownloadImageTask extends AsyncTask<String , Void, Bitmap> {

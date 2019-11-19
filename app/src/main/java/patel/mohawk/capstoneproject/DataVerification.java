@@ -173,6 +173,7 @@ class DataVerification{
             db.collection("Employees").document(userData.get(1).getText().toString())
                     .set(users)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
+
                         @Override
                         public void onSuccess(Void aVoid) {
                             Log.d("", "DocumentSnapshot successfully written!");
