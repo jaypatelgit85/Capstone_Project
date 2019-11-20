@@ -26,7 +26,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/userImage"
                     android:layout_width="177dp"
                     android:layout_height="171dp"
                     android:layout_marginStart="16dp"
@@ -36,7 +36,7 @@
                     tools:srcCompat="@tools:sample/avatars[0]" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/userName"
                     android:layout_width="176dp"
                     android:layout_height="52dp"
                     android:layout_marginTop="11dp"
@@ -44,11 +44,11 @@
                     android:gravity="center"
                     android:text="User Name Goes here"
                     android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/cardView8"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                    app:layout_constraintEnd_toStartOf="@+id/userStatscard"
+                    app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView8"
+                    android:id="@+id/userStatscard"
                     android:layout_width="195dp"
                     android:layout_height="241dp"
                     android:layout_marginTop="16dp"
@@ -56,12 +56,12 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/userStats"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textSize="16sp"
                         android:gravity="center"
-                        android:text="Stats Go here"
-                        android:textSize="16sp" />
+                        />
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,9 +81,11 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rentRecylerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="horizontal" />
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -102,6 +104,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/favRecylerView"
                     android:layout_width="403dp"
                     android:layout_height="213dp"
                     android:layout_marginTop="1dp"

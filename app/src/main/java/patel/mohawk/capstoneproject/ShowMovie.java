@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -117,6 +119,9 @@ public class ShowMovie extends AppCompatActivity {
     public void rentMovie(View view) throws JSONException {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.d(TAG,user.getUid()+"");
+        Button button = findViewById(R.id.rent);
+        button.setBackgroundColor(Color.GREEN);
+
         Map<String,String> data = new HashMap<>();
         data.put(results.getJSONObject(position).getString("imdbID"),results.getJSONObject(position).getString("Title"));
         db.collection(user.getUid()).document("Rent")
@@ -139,6 +144,8 @@ public class ShowMovie extends AppCompatActivity {
     }
 
     public void addToFav(View view) throws JSONException {
+        Button button = findViewById(R.id.fav);
+        button.setBackgroundColor(Color.GREEN);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.d(TAG,user.getUid()+"");
         Map<String,String> data = new HashMap<>();

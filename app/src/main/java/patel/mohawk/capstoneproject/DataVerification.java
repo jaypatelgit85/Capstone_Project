@@ -1,5 +1,6 @@
 package patel.mohawk.capstoneproject;
 
+import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -142,6 +144,7 @@ class DataVerification{
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("Create User", "createUserWithEmail:success");
                                 addUserData();
+
                                 verifyUseEmail();
                                 // If sign in fails, display a message to the user.
                                 Log.w("Create User", "createUserWithEmail:failure", task.getException());
@@ -161,6 +164,20 @@ class DataVerification{
     }
     private void addUserData() {
         FirebaseUser user=mAuth.getCurrentUser();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(userData.get(0).getText().toString())
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d("Firebase", "User profile updated.");
+                        }
+                    }
+                });
+
         Map<String, Object> users = new HashMap<>();
         users.put("fullName",userData.get(0).getText().toString());
         users.put("phoneNumber",userData.get(3).getText().toString());
