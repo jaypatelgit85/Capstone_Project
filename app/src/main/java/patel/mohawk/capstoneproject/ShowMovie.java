@@ -166,6 +166,12 @@ public class ShowMovie extends AppCompatActivity {
                 });
     }
 
+    public void goToReviews(View view) throws JSONException {
+        Intent intent = new Intent(this,Reviews.class);
+        intent.putExtra("uid",results.getJSONObject(position).getString("imdbID"));
+        startActivity(intent);
+    }
+
     private class DownloadImageTask extends AsyncTask<String , Void, Bitmap> {
 
 

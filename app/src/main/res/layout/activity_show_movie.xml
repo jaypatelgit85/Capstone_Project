@@ -104,10 +104,10 @@
                 android:id="@+id/rent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="173dp"
-                android:text="Rent"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="188dp"
                 android:onClick="rentMovie"
+                android:text="@string/rent"
                 app:layout_constraintEnd_toStartOf="@+id/fav"
                 app:layout_constraintTop_toBottomOf="@+id/movieShowDetails" />
 
@@ -117,10 +117,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="21dp"
-                android:text="Add To Fav"
                 android:onClick="addToFav"
+                android:text="@string/add_to_fav"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/movieShowDetails" />
+
+            <Button
+                android:id="@+id/reviewsShow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:onClick="goToReviews"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="14dp"
+                android:text="@string/reviews"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/fav"
+                app:layout_constraintStart_toEndOf="@+id/rent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
