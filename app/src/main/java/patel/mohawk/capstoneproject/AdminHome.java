@@ -16,6 +16,7 @@ public class AdminHome extends AppCompatActivity {
 
     public void goToUserHome(View view) {
         Intent intent = new Intent(this,HomePage.class);
+        startActivity(intent);
     }
 
     public void GoToManageEmployee(View view) {
@@ -24,6 +25,7 @@ public class AdminHome extends AppCompatActivity {
 
     public void addNewEmployee(View view) {
         Intent intent = new Intent(this,AdminEmployeeCreate.class);
+        startActivity(intent);
 
     }
 
@@ -32,5 +34,7 @@ public class AdminHome extends AppCompatActivity {
     }
 
     public void addMovies(View view) {
+        Intent intent = new Intent(this,AddNewMovie.class);
+        startActivity(intent);
     }
 }

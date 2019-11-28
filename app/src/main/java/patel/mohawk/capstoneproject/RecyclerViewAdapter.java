@@ -57,7 +57,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Log.d("newItem",mMoviePosters.size()+"");
 
       holder.moviePoster.setImageBitmap(mMoviePosters.get(position));
         holder.movieName.setText(mMovieNames.get(position));
@@ -75,9 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        Log.d("size",this.mMovieNames.size()+"");
         return mMovieNames.size();
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
