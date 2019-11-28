@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdminHome">
+
+    <Button
+        android:id="@+id/gotoHomepAgeBtn"
+        android:layout_width="192dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="54dp"
+        android:onClick="goToUserHome"
+        android:text="@string/go_to_user_home_page"
+        app:layout_constraintBottom_toTopOf="@+id/addEmployeeBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addMovies" />
+
+    <Button
+        android:id="@+id/manageEmployeesBtn"
+        android:layout_width="195dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="62dp"
+        android:onClick="GoToManageEmployee"
+        android:text="@string/manage_employees"
+        app:layout_constraintBottom_toTopOf="@+id/manageUsersBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addEmployeeBtn" />
+
+    <Button
+        android:id="@+id/addEmployeeBtn"
+        android:layout_width="197dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="43dp"
+        android:onClick="addNewEmployee"
+        android:text="@string/add_new_employee"
+        app:layout_constraintBottom_toTopOf="@+id/manageEmployeesBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gotoHomepAgeBtn" />
+
+    <Button
+        android:id="@+id/manageUsersBtn"
+        android:layout_width="175dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="47dp"
+        android:onClick="manageUsers"
+        android:text="@string/manage_users"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manageEmployeesBtn" />
+
+    <Button
+        android:id="@+id/addMovies"
+        android:layout_width="195dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="27dp"
+        android:onClick="addMovies"
+        android:text="@string/add_new_movies"
+        app:layout_constraintBottom_toTopOf="@+id/gotoHomepAgeBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="OnClick" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

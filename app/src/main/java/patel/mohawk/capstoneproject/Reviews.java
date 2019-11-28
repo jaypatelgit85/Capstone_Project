@@ -1,15 +1,18 @@
 package patel.mohawk.capstoneproject;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -19,8 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class Reviews extends AppCompatActivity {
     FirebaseAuth auth;
@@ -42,7 +47,10 @@ public class Reviews extends AppCompatActivity {
         EditText text = findViewById(R.id.userReview);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Map<String,String> data = new HashMap<>();
+
+
         data.put(movieId,text.getText().toString());
+
         db.collection(user.getUid()).document("Reviews")
                 .set(data, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -72,6 +80,16 @@ public class Reviews extends AppCompatActivity {
                         Log.w("", "Error writing document", e);
                     }
                 });
+
+        Toast.makeText(this, "Review Added Successfully", Toast.LENGTH_LONG).show();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();    //Do something after 100ms
+            }
+        }, 3000);
+
 
 
     }

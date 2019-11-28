@@ -21,7 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Reviews"></activity>
+        <activity android:name=".AddNewMovie"></activity>
+        <activity android:name=".AdminHome" />
+        <activity android:name=".Reviews" />
         <activity android:name=".ShowMovie" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

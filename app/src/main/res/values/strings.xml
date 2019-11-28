@@ -38,6 +38,11 @@
     <string name="reviews">Reviews</string>
     <string name="rent">Rent</string>
     <string name="add_reviews">Add Reviews</string>
+    <string name="go_to_user_home_page">Go To User Home Page</string>
+    <string name="manage_employees">Manage Employees</string>
+    <string name="add_new_employee">Add New Employee</string>
+    <string name="manage_users">Manage Users</string>
+    <string name="add_new_movies">Add New Movies</string>
 
 
 </resources>
