@@ -20,7 +20,8 @@ public class AdminHome extends AppCompatActivity {
     }
 
     public void GoToManageEmployee(View view) {
-
+        Intent intent = new Intent(this,ManageEmployees.class);
+        startActivity(intent);
     }
 
     public void addNewEmployee(View view) {
@@ -30,7 +31,8 @@ public class AdminHome extends AppCompatActivity {
     }
 
     public void manageUsers(View view) {
-
+        Intent intent = new Intent(this,ManageUsers.class);
+        startActivity(intent);
     }
 
     public void addMovies(View view) {

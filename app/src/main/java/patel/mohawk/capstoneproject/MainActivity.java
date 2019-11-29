@@ -104,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
                             user = auth.getCurrentUser();
                             if(user.isEmailVerified()){
                                 Toast.makeText(MainActivity.this, "Sign In Succesful", Toast.LENGTH_SHORT).show();
-                                goToHomePage();
+//                                goToHomePage();
+                                homePage();
                             }
                             else {
                                 Toast.makeText(MainActivity.this, "Email Not Verified Yet", Toast.LENGTH_SHORT).show();
@@ -122,12 +123,14 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
-
-
-
-    public void goToHomePage(){
-
+    public  void homePage(){
         Intent intent = new Intent(this,HomePage.class);
+        startActivity(intent);
+    }
+
+    public void goToHomePage(View view){
+
+        Intent intent = new Intent(this,AdminHome.class);
         startActivity(intent);
 
     }

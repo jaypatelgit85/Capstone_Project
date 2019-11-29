@@ -8,21 +8,21 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignUp extends AppCompatActivity {
-    @BindView(R.id.inputFullName)
+    @BindView(R.id.profileFullName)
     EditText userFullName;
-    @BindView(R.id.inputEmail)
+    @BindView(R.id.profileEmail)
     EditText userEmail;
-    @BindView(R.id.inputPassword)
+    @BindView(R.id.profilePassword)
     EditText userPassword;
-    @BindView(R.id.inputPhoneNumber)
+    @BindView(R.id.profilePhoneNumber)
     EditText phoneNumber;
-    @BindView(R.id.btn_signup)
+    @BindView(R.id.btn_changeProfile)
     Button signUp;
     ArrayList<EditText> temp;
     DataVerification dataVerification;

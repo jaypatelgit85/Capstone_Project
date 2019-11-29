@@ -69,7 +69,7 @@
             android:textSize="16dp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_signup"
+            android:id="@+id/btn_changeProfile"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -86,8 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="77dp"
         android:layout_marginTop="63dp"
-        android:onClick="homepage"
-        android:text="Maps"
+        android:onClick="goToHomePage"
+        android:text="Admin Home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 

@@ -2,12 +2,19 @@ package patel.mohawk.capstoneproject;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +54,7 @@ public class ShowMovie extends AppCompatActivity {
     int position;
     private RequestQueue requestQueue;
     FirebaseAuth auth;
+
     FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +137,13 @@ public class ShowMovie extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        try {
+                            startNotification("Rent");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         Log.d(TAG, "DocumentSnapshot successfully written!");
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -138,6 +152,7 @@ public class ShowMovie extends AppCompatActivity {
                         Log.w(TAG, "Error writing document", e);
                     }
                 });
+
 
 
 
@@ -155,6 +170,11 @@ public class ShowMovie extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                        try {
+                            startNotification("Fav");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         Log.d(TAG, "DocumentSnapshot successfully written!");
                     }
                 })
@@ -164,7 +184,39 @@ public class ShowMovie extends AppCompatActivity {
                         Log.w(TAG, "Error writing document", e);
                     }
                 });
+
+
     }
+
+    public void startNotification(String where) throws JSONException {
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        String NOTIFICATION_CHANNEL_ID = "Jay";
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            @SuppressLint("WrongConstant") NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_MAX);
+            // Configure the notification channel.
+            notificationChannel.setDescription("Movie");
+            notificationChannel.enableLights(true);
+            notificationChannel.setLightColor(Color.RED);
+            notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+            notificationChannel.enableVibration(true);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+        notificationBuilder.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setTicker("Movie App")
+                //.setPriority(Notification.PRIORITY_MAX)
+                .setContentTitle("New Movie added to "+ where)
+                .setContentText(results.getJSONObject(position).get("Title").toString()+" was just added to "+where)
+                .setContentInfo("");
+        notificationManager.notify(1, notificationBuilder.build());
+    }
+
+
+
 
     public void goToReviews(View view) throws JSONException {
         Intent intent = new Intent(this,Reviews.class);

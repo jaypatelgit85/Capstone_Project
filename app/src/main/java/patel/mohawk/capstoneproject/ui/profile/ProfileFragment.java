@@ -1,11 +1,12 @@
 package patel.mohawk.capstoneproject.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import patel.mohawk.capstoneproject.EditActivity;
 import patel.mohawk.capstoneproject.R;
 
 public class ProfileFragment extends Fragment {
@@ -32,6 +34,7 @@ public class ProfileFragment extends Fragment {
     FirebaseUser user;
     View mroot;
     String data ="";
+    Button editProfile;
     Map<String,Object> rentMovies = new HashMap<>();
     Map<String,Object> favMovies = new HashMap<>();
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -39,22 +42,36 @@ public class ProfileFragment extends Fragment {
         profileViewModel =
                 ViewModelProviders.of(this).get(ProfileViewModel.class);
         View root = inflater.inflate(R.layout.fragment_profile, container, false);
+        editProfile = root.findViewById(R.id.editProfile);
+        editProfile.setOnClickListener(view -> {
+            editProfile();
+        });
         mroot = root;
         runOnStart();
 
         return root;
 
     }
+
+
+
+    private void editProfile(){
+        auth = FirebaseAuth.getInstance();
+        user=auth.getCurrentUser();
+        Intent intent = new Intent(mroot.getContext(), EditActivity.class);
+        intent.putExtra("uid",user.getUid());
+        startActivity(intent);
+    }
+
     private void runOnStart(){
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         auth=FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
-        ImageView img = mroot.findViewById(R.id.userImage);
-        img.setImageResource(R.drawable.ic_launcher_foreground);
         TextView userName = mroot.findViewById(R.id.userName);
+        TextView userEmail = mroot.findViewById(R.id.userEmailForProfile);
         Log.d("log3",user.getUid()+"   "+user.getDisplayName());
         userName.setText(user.getDisplayName());
-
+        userEmail.setText(user.getEmail());
         DocumentReference docRef = db.collection(user.getUid()).document("Rent");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -101,8 +118,6 @@ public class ProfileFragment extends Fragment {
     }
 
     private void addDataToRecylerView(Map<String, Object> rentMovies, Map<String, Object> favMovies) {
-
-
 
     }
 
