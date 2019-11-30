@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,6 +60,10 @@ public class Reviews extends AppCompatActivity {
         getReviews();
     }
 
+    /**
+     * sets up teh view for teh reviews
+     * @param reviews
+     */
     private void initRecyleerView(ArrayList<String> reviews){
 
 
@@ -73,6 +77,9 @@ public class Reviews extends AppCompatActivity {
 
     }
 
+    /**
+     * is called once the actiity is loading in order to get all teh reviews of the movie sleeted and display it
+     */
     private void getReviews() {
         ArrayList<String> reviews= new ArrayList<>();
         FirebaseFirestore db =FirebaseFirestore.getInstance();
@@ -107,6 +114,10 @@ public class Reviews extends AppCompatActivity {
 
     }
 
+    /**
+     * adds a rview to teh database as well as to the view and sends a notification as well
+     * @param view
+     */
     public void addReview(View view) {
         EditText text = findViewById(R.id.userReview);
         FirebaseFirestore db = FirebaseFirestore.getInstance();

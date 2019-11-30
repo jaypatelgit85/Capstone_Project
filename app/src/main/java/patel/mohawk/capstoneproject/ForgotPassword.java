@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +32,10 @@ public class ForgotPassword extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
+    /**
+     * sends reset link ot the registered email
+     * @param view
+     */
     public void resetUserPassword(View view) {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.sendPasswordResetEmail(userEmail.getText().toString())

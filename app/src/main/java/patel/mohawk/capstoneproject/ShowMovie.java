@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -83,7 +83,10 @@ public class ShowMovie extends AppCompatActivity {
 
     }
 
-
+    /**
+     * gets the details of the movie selected and also downloads the image for the movie
+     * @throws JSONException
+     */
     private void primaryFunction() throws JSONException {
         String url = "http://www.omdbapi.com/?i="+results.getJSONObject(position).getString("imdbID")+"&apikey=28f258f4";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -124,6 +127,12 @@ public class ShowMovie extends AppCompatActivity {
 
     }
 
+    /**
+     * adds the movie to the rent database and turn the button green , also gives the notification
+     * @param view
+     * @throws JSONException
+     */
+
     public void rentMovie(View view) throws JSONException {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.d(TAG,user.getUid()+"");
@@ -158,6 +167,13 @@ public class ShowMovie extends AppCompatActivity {
 
     }
 
+
+    /**
+     * adds the movie to the fav database and turn the button green , also gives the notification
+     * @param view
+     * @throws JSONException
+     */
+
     public void addToFav(View view) throws JSONException {
         Button button = findViewById(R.id.fav);
         button.setBackgroundColor(Color.GREEN);
@@ -188,6 +204,11 @@ public class ShowMovie extends AppCompatActivity {
 
     }
 
+    /**
+     * builds a notification for the user with some details and displays it
+     * @param where
+     * @throws JSONException
+     */
     public void startNotification(String where) throws JSONException {
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "Jay";
@@ -223,6 +244,10 @@ public class ShowMovie extends AppCompatActivity {
         intent.putExtra("uid",results.getJSONObject(position).getString("imdbID"));
         startActivity(intent);
     }
+
+    /**
+     * download image for the moviex=
+     */
 
     private class DownloadImageTask extends AsyncTask<String , Void, Bitmap> {
 

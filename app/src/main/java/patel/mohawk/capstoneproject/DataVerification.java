@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import android.net.Uri;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -33,6 +33,12 @@ class DataVerification{
         userData = temp;
         this.isEmployee = isEmployee;
     }
+
+    /**
+     * add focus change listeners that work when the field goes out of focus and validate id the data
+     * is correct if not corrrect gives errror to teh user.
+     * @param temp
+     */
     void firstMethod(final ArrayList<EditText> temp){
 
         for(int i=0;i<temp.size();i++){
@@ -78,7 +84,7 @@ class DataVerification{
     }
 
     /**
-     *
+     *checks the pattern of email for validity
      * @param editText
      */
     void emailValidation(EditText editText) {
@@ -89,7 +95,7 @@ class DataVerification{
     }
 
     /**
-     *
+     *checks if any field is left empty
      * @param editText
      */
     void textInputValidation(EditText editText){
@@ -122,7 +128,7 @@ class DataVerification{
                 break;
             }
         }
-        signUp.abb(temp);
+
     }
 
 
@@ -145,7 +151,7 @@ class DataVerification{
                                 Log.d("Create User", "createUserWithEmail:success");
                                 addUserData();
 
-                                verifyUseEmail();
+
                                 // If sign in fails, display a message to the user.
                                 Log.w("Create User", "createUserWithEmail:failure", task.getException());
                             }
@@ -202,6 +208,23 @@ class DataVerification{
                             Log.w("", "Error writing document", e);
                         }
                     });
+
+            db.collection("isEmployee").document(userData.get(1).getText().toString())
+                    .set(users)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("", "DocumentSnapshot successfully written!");
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("", "Error writing document", e);
+                        }
+                    });
         }else{
             assert user != null;
             db.collection(user.getUid()).document("userLogin")
@@ -240,27 +263,6 @@ class DataVerification{
 
     }
 
-    private void verifyUseEmail(){
-        final FirebaseUser user=mAuth.getCurrentUser();
-        assert user != null;
-        if(!isEmployee )
-        {
-            user.sendEmailVerification()
-                    .addOnCompleteListener((OnCompleteListener) task -> {
-                        // Re-enable button
-
-                        if (task.isSuccessful()) {
-                            Log.d("Flag","Email Sent");
-                        } else {
-
-                            Log.e("", "sendEmailVerification", task.getException());
-                            Log.d("Flag","Email Sent");
-                        }
-                    });
-        }
-
-
-    }
 
 
 

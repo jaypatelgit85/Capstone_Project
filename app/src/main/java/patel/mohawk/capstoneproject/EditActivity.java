@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -57,6 +57,10 @@ public class EditActivity extends AppCompatActivity {
         number = findViewById(R.id.profilePhoneNumber);
         DocumentSnapshot doc;
         db = FirebaseFirestore.getInstance();
+
+        /**
+         * fill in teh data for teh user when calling edit profile for ease of use
+         */
         DocumentReference docRef = db.collection(uid).document("userLogin");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -81,6 +85,10 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * once button is clicked saves the changes to the profile and send teh data back to database
+     * @param view
+     */
     public void editUserProfile(View view) {
 
         Map<String, Object> data = new HashMap<>();
@@ -130,6 +138,10 @@ public class EditActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * deletes teh profile of teh user permanently
+     * @param view
+     */
     public void deleteUserProfile(View view) {
     user= mAuth.getCurrentUser();
 
@@ -146,6 +158,9 @@ public class EditActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * starts main activity again
+     */
     public void startMain(){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);

@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 

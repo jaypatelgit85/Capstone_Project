@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject.ui.home;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -69,6 +69,9 @@ public class HomeFragment extends Fragment {
         searchButton = root.findViewById(R.id.serachForMovie);
 // Register the onClick listener with the implementation above
 
+        /**
+         * add on click listener to the search button to load movies for the user
+         */
         searchButton.setOnClickListener(view -> {
             mainFunction();
         });
@@ -77,7 +80,11 @@ public class HomeFragment extends Fragment {
     }
 
 
-
+    /**
+     * This function searches the query of the user and return back an json array
+     * which is further processed and the details are sent to different classes for processing
+     *
+     */
     private void mainFunction(){
 
             EditText userQuery = intialRoot.findViewById(R.id.userSearch);
@@ -108,6 +115,11 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * calls the downloa image class in order to download image
+     * @param jsonArray
+     * @throws JSONException
+     */
     private void initBitmapImagesAndNames(JSONArray jsonArray) throws JSONException {
         identifiers = new String[jsonArray.length()];
         mNames.clear();
@@ -127,6 +139,9 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * sets up the recylcer view for teh user to see teh basic information
+     */
     private void initRecyleerView(){
 
         RecyclerView recyclerView = intialRoot.findViewById(R.id.moviesListRecyclerView);
@@ -136,6 +151,9 @@ public class HomeFragment extends Fragment {
 
     }
 
+    /**
+     * download images for the movies
+     */
     private class DownloadImageTask extends AsyncTask<String , Void, Bitmap> {
 
 

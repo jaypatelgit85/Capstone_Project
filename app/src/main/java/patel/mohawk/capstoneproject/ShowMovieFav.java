@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -41,6 +41,10 @@ public class ShowMovieFav extends AppCompatActivity {
         poster.setImageBitmap(bmp);
     }
 
+    /**
+     * removes the movie from teh fav database
+     * @param view
+     */
     public void removeFav(View view) {
 
 

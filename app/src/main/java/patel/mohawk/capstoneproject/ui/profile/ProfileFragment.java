@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject.ui.profile;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -86,7 +86,10 @@ public class ProfileFragment extends Fragment {
         return root;
     }
 
-
+    /**
+     * starts the edit profile activity if user wants to edit profile also send the uid in order to communicate with database
+     *
+     */
     private void editProfile() {
         auth = FirebaseAuth.getInstance();
         user = auth.getCurrentUser();
@@ -95,6 +98,10 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
+    /**
+     * calls the database and get the informatin needed like the rented mobvies and the fav movies also
+     * count of the movies in order to display to teh user
+     */
     private void runOnStart() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -104,6 +111,10 @@ public class ProfileFragment extends Fragment {
         Log.d("log3", user.getUid() + "   " + user.getDisplayName());
         userName.setText(user.getDisplayName());
         userEmail.setText(user.getEmail());
+
+        /**
+         * get everything froom the rent collection
+         */
         DocumentReference docRef = db.collection(user.getUid()).document("Rent");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -128,6 +139,10 @@ public class ProfileFragment extends Fragment {
 
 
         });
+        /**
+         * get everything from the favourite collection
+         */
+
         DocumentReference docRef1 = db.collection(user.getUid()).document("Fav");
         docRef1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -154,6 +169,11 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    /**
+     * get the movie info based upon the user database
+     * @param key
+     * @param method
+     */
     private void getData(String key, String method) {
         String url = "http://www.omdbapi.com/?i=" + key + "&apikey=28f258f4";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -204,6 +224,10 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    /**
+     * sets up the view for rented movies
+     */
+
     private void initRecyleerView(){
 
         RecyclerView recyclerView = mroot.findViewById(R.id.rentRecylerView);
@@ -213,6 +237,9 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    /**
+     * sets up the view for fav movies
+     */
     private void initRecyleerView1(){
 
         RecyclerView recyclerView = mroot.findViewById(R.id.favRecylerView);
@@ -258,6 +285,9 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    /**
+     * donwload poster for the movie
+     */
     private class DownloadImageTask1 extends AsyncTask<String, Void, Bitmap> {
 
 

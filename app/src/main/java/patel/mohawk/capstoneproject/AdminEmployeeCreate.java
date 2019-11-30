@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,6 +75,10 @@ public class AdminEmployeeCreate extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * calls data verification calss to verify teh dtaa and add a new account to the database
+     * @param view
+     */
     public void createEmployeeAccount(View view) {
         if (dataVerification.createAccount()) {
             changeActivity();

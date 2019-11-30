@@ -1,11 +1,9 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import android.Manifest;
+
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +19,10 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -43,16 +45,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         signIn.setEnabled(false);
         listenerAdditions();
-        userEmail.setText("jaypatel_85@icloud.com");
-        userPassword.setText("bluehorse");
-//        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-//            return;
-//        }else{
-//            // Write you code here if permission already given.
-//        }
+
     }
 
+    /**
+     * add listeneners to teh email and password field to check validity
+     */
     private void listenerAdditions() {
         userEmail.addTextChangedListener(new TextWatcher() {
             @Override
@@ -79,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * calls forgot password acticity
+     * @param view
+     */
     public void forgot_password(View view) {
         Intent intent=new Intent(this, ForgotPassword.class);
         startActivity(intent);
@@ -87,11 +88,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * calls sign up activity
+     * @param view
+     */
     public void sign_up(View view) {
         Intent intent=new Intent(this,SignUp.class);
         startActivity(intent);
     }
 
+
+    /**
+     * authenticates the credentials and calls a function to check if admin,employee,user is logging in
+     * authenticates the credentials and calls a function to check if admin,employee,user is logging in
+     * @param view
+     */
     public void login(View view) {
         auth=FirebaseAuth.getInstance();
         auth.signInWithEmailAndPassword(userEmail.getText().toString(),userPassword.getText().toString())
@@ -102,14 +113,11 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("Sign In", "signInWithEmail:success");
                             user = auth.getCurrentUser();
-                            if(user.isEmailVerified()){
+
                                 Toast.makeText(MainActivity.this, "Sign In Succesful", Toast.LENGTH_SHORT).show();
-//                                goToHomePage();
-                                homePage();
-                            }
-                            else {
-                                Toast.makeText(MainActivity.this, "Email Not Verified Yet", Toast.LENGTH_SHORT).show();
-                            }
+
+                                    callOtherFunction();
+
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -123,6 +131,51 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+
+    /**
+     * is called once credentials are correct to see if user or admin or employee is logging in
+     */
+    private void callOtherFunction() {
+        Log.d("In","in Other Function");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Log.d("Please","in else");
+        DocumentReference docRef = db.collection("isEmployee").document(userEmail.getText().toString());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        Log.d("Please","inDocument found");
+                        goToEmployeePage();
+                    } else {
+                        Log.d("Please","in document not found");
+                        if(userEmail.getText().toString().equals("085.jay@gmail.com")){
+                            gotToAdminHome();
+                        }else{
+                            homePage();
+                        }
+
+                    }
+                } else {
+
+                }
+            }
+        });
+
+
+    }
+
+    private void goToEmployeePage() {
+        Intent intent = new Intent(this, EmployeeHome.class);
+        startActivity(intent);
+    }
+
+    private void gotToAdminHome() {
+        Intent intent = new Intent(this,AdminHome.class);
+        startActivity(intent);
+    }
+
     public  void homePage(){
         Intent intent = new Intent(this,HomePage.class);
         startActivity(intent);

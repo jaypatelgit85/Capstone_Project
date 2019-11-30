@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import android.app.Activity;
 import  android.content.Context;
 import android.content.Intent;
@@ -45,7 +45,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         Log.d("size",this.mMovieNames.size()+"");
     }
-
+    /**
+     * creates the view to addd teh data for teh profile details
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,7 +58,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
-
+    /**
+     * sets the data in teh respected fields for the array that is recieved and sets on click listener for further actions
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 

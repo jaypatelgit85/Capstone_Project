@@ -89,7 +89,7 @@
             android:layout_marginBottom="24dp"
             android:onClick="deleteUserProfile"
             android:padding="12dp"
-            android:text="@string/edit_profile" />
+            android:text="@string/delete_profile" />
 
     </LinearLayout>
 

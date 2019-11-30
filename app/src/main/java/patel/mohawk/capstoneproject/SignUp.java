@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,26 +51,30 @@ public class SignUp extends AppCompatActivity {
             dataVerification.firstMethod(temp);
     }
 
-
+    /**
+     * takes back to login page
+     * @param view
+     */
     public void switchToLoginPage(View view) {
         changeActivity();
     }
 
+    /**
+     * changes the activity to login page
+     */
     public void changeActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * send the user data to data verification class to create a new use
+     * @param view
+     */
     public void createAccount(View view) {
     if(dataVerification.createAccount()){
         changeActivity();
     }
     }
-    public void abb(boolean temp){
-        Log.d("booleanaaaaa",""+temp);
-    /* if(temp){
-         signUp.setEnabled(temp);
-     }*/
 
-    }
 }

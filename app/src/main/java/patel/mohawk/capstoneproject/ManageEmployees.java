@@ -1,5 +1,5 @@
 package patel.mohawk.capstoneproject;
-
+// I Jay Kumar Patel,000744834 have done this assignment by my own and haven't copied it from anywhere.
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +34,10 @@ public class ManageEmployees extends AppCompatActivity {
         callMainMethod();
     }
 
+    /**
+     * is called when teh activity is loading
+     * gets the dtaa of every users and sends it tp userAdapter to show to the admin
+     */
     private void callMainMethod() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Employees")
@@ -59,6 +63,10 @@ public class ManageEmployees extends AppCompatActivity {
 
 
     }
+
+    /**
+     * sets up teh view for teh admin to see teh users
+     */
     private void initRecyleerView(){
         Log.d(TAG,"in init");
         RecyclerView recyclerView = findViewById(R.id.employeesRecylerView);
