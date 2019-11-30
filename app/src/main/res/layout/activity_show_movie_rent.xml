@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ShowMovieRent">
+
+    <TextView
+        android:id="@+id/movieNameRent"
+        android:layout_width="190dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="119dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView11" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView11"
+        android:layout_width="402dp"
+        android:layout_height="492dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="492dp">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/moviePosterrent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/removeFromRent"
+        android:layout_width="167dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="79dp"
+        android:onClick="removeRent"
+        android:layout_marginEnd="220dp"
+        android:text="@string/remove_from_rent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movieNameRent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

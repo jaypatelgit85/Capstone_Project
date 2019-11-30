@@ -44,6 +44,11 @@
     <string name="manage_users">Manage Users</string>
     <string name="add_new_movies">Add New Movies</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="remove_from_rent">Remove From Rent</string>
+    <string name="remove_from_fav">Remove From Fav</string>
+    <string name="delete_user">Delete User</string>
+    <string name="disable_account">Disable Account</string>
+    <string name="movies_on_rent">Movies On rent</string>
 
 
 </resources>

@@ -187,7 +187,7 @@ class DataVerification{
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         if(isEmployee){
             assert user != null;
-            db.collection("Employees").document(userData.get(1).getText().toString())
+            db.collection("Employees").document(user.getUid())
                     .set(users)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
 
@@ -205,6 +205,22 @@ class DataVerification{
         }else{
             assert user != null;
             db.collection(user.getUid()).document("userLogin")
+                    .set(users)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d("", "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("", "Error writing document", e);
+                        }
+                    });
+
+
+            db.collection("AllUsers").document(user.getUid())
                     .set(users)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

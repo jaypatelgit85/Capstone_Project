@@ -21,7 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ManageEmployees"></activity>
+        <activity android:name=".RemoveEmployeeOrUser"></activity>
+        <activity android:name=".ShowMovieFav" />
+        <activity android:name=".ShowMovieRent" />
+        <activity android:name=".ManageEmployees" />
         <activity android:name=".ManageUsers" />
         <activity android:name=".EditActivity" />
         <activity android:name=".AddNewMovie" />

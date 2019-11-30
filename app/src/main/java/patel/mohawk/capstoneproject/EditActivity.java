@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
@@ -35,7 +37,9 @@ public class EditActivity extends AppCompatActivity {
     TextView email;
     EditText number;
     String TAG = "Edit_Profile";
-    EditText password;
+
+    EditText userPass;
+
     String uid;
     FirebaseUser user;
     FirebaseFirestore db;
@@ -45,6 +49,7 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
         mAuth=FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+        userPass = findViewById(R.id.profilePassword);
         intent = getIntent();
         uid = intent.getStringExtra("uid");
         name = findViewById(R.id.profileFullName);
@@ -121,6 +126,29 @@ public class EditActivity extends AppCompatActivity {
         }, 2000);
 
 
+
+    }
+
+
+    public void deleteUserProfile(View view) {
+    user= mAuth.getCurrentUser();
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User account deleted.");
+                            startMain();
+
+                        }
+                    }
+                });
+    }
+
+    public void startMain(){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
 
     }
 }

@@ -131,7 +131,7 @@ public class ShowMovie extends AppCompatActivity {
         button.setBackgroundColor(Color.GREEN);
 
         Map<String,String> data = new HashMap<>();
-        data.put(results.getJSONObject(position).getString("imdbID"),results.getJSONObject(position).getString("Title"));
+        data.put(results.getJSONObject(position).getString("imdbID"),results.getJSONObject(position).getString("imdbID"));
         db.collection(user.getUid()).document("Rent")
                 .set(data, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -164,7 +164,7 @@ public class ShowMovie extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Log.d(TAG,user.getUid()+"");
         Map<String,String> data = new HashMap<>();
-        data.put(results.getJSONObject(position).getString("imdbID"),results.getJSONObject(position).getString("Title"));
+        data.put(results.getJSONObject(position).getString("imdbID"),results.getJSONObject(position).getString("imdbID"));
         db.collection(user.getUid()).document("Fav")
                 .set(data, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

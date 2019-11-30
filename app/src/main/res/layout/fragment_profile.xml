@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/profileFragment"
     android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -50,9 +51,8 @@
                         android:id="@+id/userStats"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:textSize="16sp"
                         android:gravity="center"
-                        />
+                        android:textSize="16sp" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -106,22 +106,40 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="407dp"
-            android:layout_height="215dp"
+            android:layout_width="403dp"
+            android:layout_height="213dp"
             android:layout_marginTop="9dp"
-            android:layout_marginBottom="12dp"
             app:cardBackgroundColor="#d3d3d3"
-            app:layout_constraintBottom_toTopOf="@+id/cardView4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rentRecylerView"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rentRecylerView"
+                    android:layout_width="392dp"
+                    android:layout_height="168dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="6dp"
+                    android:scrollbars="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="131dp"
+                    android:layout_height="23dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginEnd="143dp"
+                    android:gravity="center"
+                    android:text="@string/movies_on_rent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -142,11 +160,22 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/favRecylerView"
-                    android:layout_width="403dp"
-                    android:layout_height="213dp"
+                    android:layout_width="395dp"
+                    android:layout_height="179dp"
+                    android:layout_marginTop="6dp"
+
+                    android:layout_marginEnd="4dp"
+                    android:scrollbars="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="123dp"
+                    android:layout_height="28dp"
                     android:layout_marginTop="1dp"
-                    android:layout_marginEnd="1dp"
-                    android:scrollbars="horizontal"
+                    android:layout_marginEnd="133dp"
+                    android:text="Favourite  Movies"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -43,7 +43,6 @@ public class AdminEmployeeCreate extends AppCompatActivity {
     EditText userEmail;
     @BindView(R.id.inputEmployeePassword)
     EditText userPassword;
-    EditText userSecurityQuestion;
     @BindView(R.id.btnEmployeeSignup)
     Button btnEmployeeSignUp;
     ArrayList<EditText> temp;

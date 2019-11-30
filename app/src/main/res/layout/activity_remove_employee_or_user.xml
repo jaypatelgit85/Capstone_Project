@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RemoveEmployeeOrUser">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView13"
+        android:layout_width="403dp"
+        android:layout_height="241dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/userNameToBeDeleted"
+                android:layout_width="370dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="27dp"
+                android:layout_marginEnd="14dp"
+                android:textSize="22sp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/userEmailToBeDeleted"
+                android:layout_width="358dp"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:layout_height="70dp"
+                android:layout_marginTop="51dp"
+                android:layout_marginEnd="19dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userNameToBeDeleted" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+    <Button
+        android:id="@+id/deleteUser"
+        android:layout_width="149dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="177dp"
+        android:onClick="deleteUser"
+        android:text="@string/delete_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/disableAccount" />
+
+    <Button
+        android:id="@+id/disableAccount"
+        android:layout_width="168dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="176dp"
+        android:onClick="disableAccount"
+        android:text="@string/disable_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
